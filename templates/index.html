@@ -1,0 +1,215 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Header -->
+<header id="top" class="header">
+	<div class="text-vertical-center">
+		<h1>Flight Wizard</h1>
+		<h3>Flight Delay Predictor</h3>
+		<br>
+    <div class="container">
+    	{% if src_weather and dest_weather %}
+    		{% if result %}
+    			<h1>Will be delayed</h1>
+    		{% else %}
+    			<h1>On Time</h1>
+    		{% endif %}
+    		<a href="/" class="btn btn-dark btn-lg">Predict Again</a>
+    	{% else %}
+    	<form action="/" method="post">
+    		<fieldset class="form-group">
+    			<label>Origin</label>
+    			<select class="form-control input-lg" name="src">
+    				<option value="KAPN">A.P. Hill Army Airfield – Fort A.P. Hill, Virginia</option>
+    				<option value="KABY">Aberdeen Regional Airport – Aberdeen, South Dakota</option>
+    				<option value="KABQ">Abilene Regional Airport – Abilene, Texas</option>
+    				<option value="KADM">Ada Municipal Airport – Ada, Oklahoma</option>
+    				<option value="KAFP">Afton Municipal Airport – Afton, Wyoming</option>
+    				<option value="KAIO">Aiken Municipal Airport – Aiken, South Carolina</option>
+    				<option value="KALM">Airstrip west of Libby AAF See KFHU</option>
+    				<option value="KALB">Akron Fulton International Airport – Akron, Ohio</option>
+    				<option value="KALN">Alamogordo – White Sands Regional Airport – Alamogordo, New Mexico</option>
+    				<option value="KALI">Albany International Airport – Albany, New York</option>
+    				<option value="KAEX">Albert Lea Municipal Airport – Albert Lea, Minnesota</option>
+    				<option value="KABR">Albuquerque International Sunport – Albuquerque, New Mexico</option>
+    				<option value="KAMW">Alexander Salamon Airport – West Union, Ohio</option>
+    				<option value="KAFF">Alexandria International Airport – Alexandria, Louisiana</option>
+    				<option value="KALK">Alice International Airport – Alice, Texas</option>
+    				<option value="KACQ">Allen Parish Airport – Oakdale, Louisiana</option>
+    				<option value="KAIB">Alliance Municipal Airport – Alliance, Nebraska</option>
+    				<option value="KABE">Alturas Municipal Airport – Alturas, California</option>
+    				<option value="KAHN">Amery Municipal Airport – Amery, Wisconsin</option>
+    				<option value="KANB">Ames Municipal Airport – Ames, Iowa</option>
+    				<option value="KAIG">Anderson Municipal Airport (Darlington Field) – Anderson, Indiana</option>
+    				<option value="KANE">Anderson Regional Airport – Anderson, South Carolina</option>
+    				<option value="KAEG">Andrews Air Force Base – Camp Springs, Maryland</option>
+    				<option value="KAND">Anniston Regional Airport – Anniston, Alabama</option>
+    				<option value="KANJ">Anoka County – Blaine Airport (Janes Field) – Minneapolis</option>
+    				<option value="KAFW">Anson County Airport – Wadesboro, North Carolina</option>
+    				<option value="KACJ">Antrim County Airport – Bellaire, Michigan</option>
+    				<option value="KAAO">Apalachicola Regional Airport – Apalachicola, Florida</option>
+    				<option value="KACY">Arcata – Eureka Airport – Arcata, California</option>
+    				<option value="KAOH">Arco Butte County Airport – Arco, Idaho</option>
+    				<option value="KADS">Ardmore Municipal Airport – Ardmore, Oklahoma</option>
+    				<option value="KAHQ">Athens Ben Epps Airport – Athens, Georgia</option>
+    				<option value="KAIT">Atlantic Municipal Airport – Atlantic, Iowa</option>
+    				<option value="KADU">Atwood – Rawlins County City – County Airport – Atwood, Kansas</option>
+    				<option value="KADW">Audubon County Airport – Audubon, Iowa</option>
+    				<option value="KAPA">Ava Bill Martin Memorial Airport – Ava, Missouri</option>
+    				<option value="KAMN">Bacon County Airport – Alma, Georgia</option>
+    				<option value="KAKH">Blake Field – Delta, Colorado</option>
+    				<option value="KAPC">Centennial Airport – Centennial, Colorado (near Denver)</option>
+    				<option value="KAEL">Central Colorado Regional Airport – Buena Vista, Colorado</option>
+    				<option value="KAKQ">Colorado Plains Regional Airport – Akron, Colorado</option>
+    				<option value="KAJR">Corona Municipal Airport – Corona, California</option>
+    				<option value="KAEJ">Double Eagle II Airport – Albuquerque, New Mexico</option>
+    				<option value="KAGC">Fort Worth Alliance Airport – Fort Worth, Texas</option>
+    				<option value="KAKO">Gastonia Municipal Airport – Gastonia, North Carolina</option>
+    				<option value="KAJZ">Habersham County Airport – Cornelia, Georgia</option>
+    				<option value="KADC">Henderson Field – Wallace, North Carolina</option>
+    				<option value="KAFO">Jaffrey Airport – Silver Ranch Airpark – Jaffrey, New Hampshire</option>
+    				<option value="KAIK">Langlade County Airport – Antigo, Wisconsin</option>
+    				<option value="KANQ">Lee Airport – Annapolis, Maryland</option>
+    				<option value="KAJG">Lee C. Fine Memorial Airport – Lake Ozark, Missouri</option>
+    				<option value="KABI">Lehigh Valley International Airport – Allentown, Bethlehem and Easton, Pennsylvania</option>
+    				<option value="KADH">Lenawee County Airport – Adrian, Michigan</option>
+    				<option value="KAOO">Lima Allen County Airport – Lima, Ohio</option>
+    				<option value="KAAA">Logan County Airport – Lincoln, Illinois</option>
+    				<option value="KAAF">Logan County Airport – Lincoln, Illinois</option>
+    				<option value="KAGS">MacDill AFB Auxiliary Field – Avon Park, Florida</option>
+    				<option value="KAJO">Mount Carmel Municipal Airport – Mount Carmel, Illinois</option>
+    				<option value="KACP">Nantucket Memorial Airport – Nantucket, Massachusetts</option>
+    				<option value="KAPF">Napa County Airport – Napa, California</option>
+    				<option value="KAFN">Nebraska City Municipal Airport – Nebraska City, Nebraska</option>
+    				<option value="KAMG">Rick Husband Amarillo International Airport – Amarillo, Texas</option>
+    				<option value="KALW">San Luis Valley Regional Airport – Alamosa, Colorado</option>
+    				<option value="KANK">Sault Ste. Marie Municipal Airport (Sanderson Field) – Sault Ste. Marie, Michigan</option>
+    				<option value="KACK">Souther Field – Americus, Georgia</option>
+    				<option value="KACB">Southwest Georgia Regional Airport – Albany, Georgia</option>
+    				<option value="KALO">St. Louis Regional Airport – Alton, Illinois</option>
+    				<option value="KAAT">Taylor County Airport – Campbellsville, Kentucky</option>
+    				<option value="KAMA">Thomas C. Russell Field – Alexander City, Alabama</option>
+    				<option value="KANW">Tri – State Steuben County Airport – Angola, Indiana</option>
+    				<option value="KAFJ">United States Air Force Academy Airfield – Colorado Springs, Colorado</option>
+    				<option value="KACV">Waco Regional Airport – Waco, Texas</option>
+    				<option value="KADG">Wadena Municipal Airport – Wadena, Minnesota</option>
+    				<option value="KAIA">Wahoo Municipal Airport – Wahoo, Nebraska</option>
+    				<option value="KAKR">Wakefield Municipal Airport – Wakefield, Virginia</option>
+    				<option value="KALX">Walla Walla Regional Airport – Walla Walla, Washington</option>
+    				<option value="KACT">Waseca Municipal Airport – Waseca, Minnesota</option>
+    				<option value="KAFK">Washington County Airport – Washington, Pennsylvania</option>
+    				<option value="KALS">Waterloo Regional Airport – Waterloo, Iowa</option>
+    				<option value="KCEF">Westover Metropolitan Airport / Westover Air Reserve Base – Springfield / Chicopee, Massachusetts</option>
+    			</select>
+    		</fieldset>
+    		<fieldset class="form-group">
+    			<label>Destination</label>
+    			<select class="form-control input-lg" name="dest">
+    				<option value="KAPN">A.P. Hill Army Airfield – Fort A.P. Hill, Virginia</option>
+    				<option value="KABY">Aberdeen Regional Airport – Aberdeen, South Dakota</option>
+    				<option value="KABQ">Abilene Regional Airport – Abilene, Texas</option>
+    				<option value="KADM">Ada Municipal Airport – Ada, Oklahoma</option>
+    				<option value="KAFP">Afton Municipal Airport – Afton, Wyoming</option>
+    				<option value="KAIO">Aiken Municipal Airport – Aiken, South Carolina</option>
+    				<option value="KALM">Airstrip west of Libby AAF See KFHU</option>
+    				<option value="KALB">Akron Fulton International Airport – Akron, Ohio</option>
+    				<option value="KALN">Alamogordo – White Sands Regional Airport – Alamogordo, New Mexico</option>
+    				<option value="KALI">Albany International Airport – Albany, New York</option>
+    				<option value="KAEX">Albert Lea Municipal Airport – Albert Lea, Minnesota</option>
+    				<option value="KABR">Albuquerque International Sunport – Albuquerque, New Mexico</option>
+    				<option value="KAMW">Alexander Salamon Airport – West Union, Ohio</option>
+    				<option value="KAFF">Alexandria International Airport – Alexandria, Louisiana</option>
+    				<option value="KALK">Alice International Airport – Alice, Texas</option>
+    				<option value="KACQ">Allen Parish Airport – Oakdale, Louisiana</option>
+    				<option value="KAIB">Alliance Municipal Airport – Alliance, Nebraska</option>
+    				<option value="KABE">Alturas Municipal Airport – Alturas, California</option>
+    				<option value="KAHN">Amery Municipal Airport – Amery, Wisconsin</option>
+    				<option value="KANB">Ames Municipal Airport – Ames, Iowa</option>
+    				<option value="KAIG">Anderson Municipal Airport (Darlington Field) – Anderson, Indiana</option>
+    				<option value="KANE">Anderson Regional Airport – Anderson, South Carolina</option>
+    				<option value="KAEG">Andrews Air Force Base – Camp Springs, Maryland</option>
+    				<option value="KAND">Anniston Regional Airport – Anniston, Alabama</option>
+    				<option value="KANJ">Anoka County – Blaine Airport (Janes Field) – Minneapolis</option>
+    				<option value="KAFW">Anson County Airport – Wadesboro, North Carolina</option>
+    				<option value="KACJ">Antrim County Airport – Bellaire, Michigan</option>
+    				<option value="KAAO">Apalachicola Regional Airport – Apalachicola, Florida</option>
+    				<option value="KACY">Arcata – Eureka Airport – Arcata, California</option>
+    				<option value="KAOH">Arco Butte County Airport – Arco, Idaho</option>
+    				<option value="KADS">Ardmore Municipal Airport – Ardmore, Oklahoma</option>
+    				<option value="KAHQ">Athens Ben Epps Airport – Athens, Georgia</option>
+    				<option value="KAIT">Atlantic Municipal Airport – Atlantic, Iowa</option>
+    				<option value="KADU">Atwood – Rawlins County City – County Airport – Atwood, Kansas</option>
+    				<option value="KADW">Audubon County Airport – Audubon, Iowa</option>
+    				<option value="KAPA">Ava Bill Martin Memorial Airport – Ava, Missouri</option>
+    				<option value="KAMN">Bacon County Airport – Alma, Georgia</option>
+    				<option value="KAKH">Blake Field – Delta, Colorado</option>
+    				<option value="KAPC">Centennial Airport – Centennial, Colorado (near Denver)</option>
+    				<option value="KAEL">Central Colorado Regional Airport – Buena Vista, Colorado</option>
+    				<option value="KAKQ">Colorado Plains Regional Airport – Akron, Colorado</option>
+    				<option value="KAJR">Corona Municipal Airport – Corona, California</option>
+    				<option value="KAEJ">Double Eagle II Airport – Albuquerque, New Mexico</option>
+    				<option value="KAGC">Fort Worth Alliance Airport – Fort Worth, Texas</option>
+    				<option value="KAKO">Gastonia Municipal Airport – Gastonia, North Carolina</option>
+    				<option value="KAJZ">Habersham County Airport – Cornelia, Georgia</option>
+    				<option value="KADC">Henderson Field – Wallace, North Carolina</option>
+    				<option value="KAFO">Jaffrey Airport – Silver Ranch Airpark – Jaffrey, New Hampshire</option>
+    				<option value="KAIK">Langlade County Airport – Antigo, Wisconsin</option>
+    				<option value="KANQ">Lee Airport – Annapolis, Maryland</option>
+    				<option value="KAJG">Lee C. Fine Memorial Airport – Lake Ozark, Missouri</option>
+    				<option value="KABI">Lehigh Valley International Airport – Allentown, Bethlehem and Easton, Pennsylvania</option>
+    				<option value="KADH">Lenawee County Airport – Adrian, Michigan</option>
+    				<option value="KAOO">Lima Allen County Airport – Lima, Ohio</option>
+    				<option value="KAAA">Logan County Airport – Lincoln, Illinois</option>
+    				<option value="KAAF">Logan County Airport – Lincoln, Illinois</option>
+    				<option value="KAGS">MacDill AFB Auxiliary Field – Avon Park, Florida</option>
+    				<option value="KAJO">Mount Carmel Municipal Airport – Mount Carmel, Illinois</option>
+    				<option value="KACP">Nantucket Memorial Airport – Nantucket, Massachusetts</option>
+    				<option value="KAPF">Napa County Airport – Napa, California</option>
+    				<option value="KAFN">Nebraska City Municipal Airport – Nebraska City, Nebraska</option>
+    				<option value="KAMG">Rick Husband Amarillo International Airport – Amarillo, Texas</option>
+    				<option value="KALW">San Luis Valley Regional Airport – Alamosa, Colorado</option>
+    				<option value="KANK">Sault Ste. Marie Municipal Airport (Sanderson Field) – Sault Ste. Marie, Michigan</option>
+    				<option value="KACK">Souther Field – Americus, Georgia</option>
+    				<option value="KACB">Southwest Georgia Regional Airport – Albany, Georgia</option>
+    				<option value="KALO">St. Louis Regional Airport – Alton, Illinois</option>
+    				<option value="KAAT">Taylor County Airport – Campbellsville, Kentucky</option>
+    				<option value="KAMA">Thomas C. Russell Field – Alexander City, Alabama</option>
+    				<option value="KANW">Tri – State Steuben County Airport – Angola, Indiana</option>
+    				<option value="KAFJ">United States Air Force Academy Airfield – Colorado Springs, Colorado</option>
+    				<option value="KACV">Waco Regional Airport – Waco, Texas</option>
+    				<option value="KADG">Wadena Municipal Airport – Wadena, Minnesota</option>
+    				<option value="KAIA">Wahoo Municipal Airport – Wahoo, Nebraska</option>
+    				<option value="KAKR">Wakefield Municipal Airport – Wakefield, Virginia</option>
+    				<option value="KALX">Walla Walla Regional Airport – Walla Walla, Washington</option>
+    				<option value="KACT">Waseca Municipal Airport – Waseca, Minnesota</option>
+    				<option value="KAFK">Washington County Airport – Washington, Pennsylvania</option>
+    				<option value="KALS">Waterloo Regional Airport – Waterloo, Iowa</option>
+    				<option value="KCEF">Westover Metropolitan Airport / Westover Air Reserve Base – Springfield / Chicopee, Massachusetts</option>
+    			</select>
+    		</fieldset>
+    		<fieldset class="form-group">
+	    			<label>Departure Time</label>
+	    			<input type="time" name="dep_time" class="form-control input-lg" required="required">
+    		</fieldset>
+    		{% if error %}
+    			<p style="color: #eb6a5a;"><strong>{{ error }}</strong></p>
+    		{% endif %}
+    		<input type="submit" name="submit" value="Check" class="btn btn-dark btn-lg">
+    	</form>
+    	{% endif %}
+    </div>
+</div>
+</header>
+<!-- About -->
+   {#  <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+                    <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section> #}
+{% endblock %}

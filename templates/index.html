@@ -8,17 +8,50 @@
 		<br>
     <div class="container">
     	{% if src_weather and dest_weather %}
-    		{% if result %}
-    			<h1>Will be delayed</h1>
-    		{% else %}
-    			<h1>On Time</h1>
-    		{% endif %}
+    		<div class="row">
+	    		<div class="col-md-12 col-sm-12">
+		    		{% if result %}
+		    			<img style="max-width: 180px" src="{{ url_for('static', filename='img/delay.png') }}">
+		    		{% else %}
+		    			<img style="max-width: 180px" src="{{ url_for('static', filename='img/ontime.png') }}">
+		    		{% endif %}
+	    		</div>
+	    		<div style="border-radius: 35px; background-color: rgba(255,255,255,0.4);" class="col-md-4 col-sm-6">
+	    			<h2>Origin (now)</h2>
+	    			{% set src_icn = src_weather[0].get_weather_icon_name() %}
+	    			<img min-width="120" src="http://openweathermap.org/img/w/{{ src_icn }}.png">
+	    			<p>
+	    				<strong>
+	    				{{ icons[src_icn[0:-1]].capitalize() }}
+	    				{% if src_icn[-1:] == 'd' %} (Day) {% else %} (Night) {% endif %}
+	    				</strong>
+	    			</p>
+	    			<p><strong>Temp: {{ src_weather[0].get_temperature('celsius')['max'] }}C</strong></p>
+	    			<p><strong>Wind Speed: {{ src_weather[0].get_wind()['speed'] }}m/s</strong></p>
+	    		</div>
+	    		<div style="border-radius: 35px; background-color: rgba(255,255,255,0.4);" class="col-md-4 col-md-offset-4 col-sm-6">
+	    			<h2>Destination (at arrival)</h2>
+	    			{% set dest_icn = dest_weather[0].get_weather_icon_name() %}
+	    			<img min-width="120" src="http://openweathermap.org/img/w/{{ dest_icn }}.png">
+	    			<p>
+	    				<strong>
+	    				{{ icons[dest_icn[0:-1]].capitalize() }}
+	    				{% if dest_icn[-1:] == 'd' %} (Day) {% else %} (Night) {% endif %}
+	    				</strong>
+	    			</p>
+	    			<p><strong>Temp: {{ dest_weather[0].get_temperature('celsius')['max'] }}C</strong></p>
+	    			<p><strong>Wind Speed: {{ dest_weather[0].get_wind()['speed'] }}m/s</strong></p>
+	    		</div>
+			</div>
     		<a href="/" class="btn btn-dark btn-lg">Predict Again</a>
     	{% else %}
     	<form action="/" method="post">
     		<fieldset class="form-group">
-    			<label>Origin</label>
-    			<select class="form-control input-lg" name="src">
+    			<div class="row">
+	    			<label>Origin</label>
+    			</div>
+    			<div class="col-md-8 col-md-offset-2">
+    				<select class="form-control input-lg" name="src">
     				<option value="KAPN">A.P. Hill Army Airfield – Fort A.P. Hill, Virginia</option>
     				<option value="KABY">Aberdeen Regional Airport – Aberdeen, South Dakota</option>
     				<option value="KABQ">Abilene Regional Airport – Abilene, Texas</option>
@@ -69,7 +102,6 @@
     				<option value="KAFO">Jaffrey Airport – Silver Ranch Airpark – Jaffrey, New Hampshire</option>
     				<option value="KAIK">Langlade County Airport – Antigo, Wisconsin</option>
     				<option value="KANQ">Lee Airport – Annapolis, Maryland</option>
-    				<option value="KAJG">Lee C. Fine Memorial Airport – Lake Ozark, Missouri</option>
     				<option value="KABI">Lehigh Valley International Airport – Allentown, Bethlehem and Easton, Pennsylvania</option>
     				<option value="KADH">Lenawee County Airport – Adrian, Michigan</option>
     				<option value="KAOO">Lima Allen County Airport – Lima, Ohio</option>
@@ -99,11 +131,15 @@
     				<option value="KAFK">Washington County Airport – Washington, Pennsylvania</option>
     				<option value="KALS">Waterloo Regional Airport – Waterloo, Iowa</option>
     				<option value="KCEF">Westover Metropolitan Airport / Westover Air Reserve Base – Springfield / Chicopee, Massachusetts</option>
-    			</select>
+    				</select>
+    			</div>
     		</fieldset>
     		<fieldset class="form-group">
-    			<label>Destination</label>
-    			<select class="form-control input-lg" name="dest">
+    			<div class="row">
+    				<label>Destination</label>
+    			</div>
+    			<div class="col-md-8 col-md-offset-2">
+    				<select class="form-control input-lg" name="dest">
     				<option value="KAPN">A.P. Hill Army Airfield – Fort A.P. Hill, Virginia</option>
     				<option value="KABY">Aberdeen Regional Airport – Aberdeen, South Dakota</option>
     				<option value="KABQ">Abilene Regional Airport – Abilene, Texas</option>
@@ -154,7 +190,6 @@
     				<option value="KAFO">Jaffrey Airport – Silver Ranch Airpark – Jaffrey, New Hampshire</option>
     				<option value="KAIK">Langlade County Airport – Antigo, Wisconsin</option>
     				<option value="KANQ">Lee Airport – Annapolis, Maryland</option>
-    				<option value="KAJG">Lee C. Fine Memorial Airport – Lake Ozark, Missouri</option>
     				<option value="KABI">Lehigh Valley International Airport – Allentown, Bethlehem and Easton, Pennsylvania</option>
     				<option value="KADH">Lenawee County Airport – Adrian, Michigan</option>
     				<option value="KAOO">Lima Allen County Airport – Lima, Ohio</option>
@@ -184,11 +219,16 @@
     				<option value="KAFK">Washington County Airport – Washington, Pennsylvania</option>
     				<option value="KALS">Waterloo Regional Airport – Waterloo, Iowa</option>
     				<option value="KCEF">Westover Metropolitan Airport / Westover Air Reserve Base – Springfield / Chicopee, Massachusetts</option>
-    			</select>
+    				</select>
+    			</div>
     		</fieldset>
     		<fieldset class="form-group">
-	    			<label>Departure Time</label>
-	    			<input type="time" name="dep_time" class="form-control input-lg" required="required">
+		    		<div class="row">
+		    			<label>Departure Time</label>
+	    			</div>
+	    			<div class="col-md-8 col-md-offset-2">
+		    			<input type="time" name="dep_time" class="form-control input-lg" required="required">
+		    		</div>
     		</fieldset>
     		{% if error %}
     			<p style="color: #eb6a5a;"><strong>{{ error }}</strong></p>

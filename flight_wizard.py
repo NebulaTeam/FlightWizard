@@ -5,6 +5,8 @@ SECRET_KEY = "Nebula Team"
 
 app = Flask(__name__)
 
+OWM_ICON_DESC = {'01': 'clear sky', '02': 'few clouds', '03': 'scattered clouds', '04': 'broken clouds', '09': 'shower rain', '10': 'rain', '11': 'thunderstorm', '13': 'snow', '50': 'mist' }
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
 	if request.method == 'POST':
@@ -19,7 +21,7 @@ def index():
 		result = is_delayed(srcW) and is_delayed(destW)
 		print(result, srcW, destW)
 
-		return render_template("index.html", result=result, src_weather=srcW, dest_weather=destW)
+		return render_template("index.html", result=result, src_weather=srcW, dest_weather=destW, icons=OWM_ICON_DESC)
 	else:
 		return render_template("index.html")
 
